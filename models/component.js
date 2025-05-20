@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const ComponentSchema = new mongoose.Schema({
     item:{
         type: String,
-        required: [true, 'Please Provided The Name Of Your Item'],
+        required: [true, 'Please Provide The Name Of Your Item'],
         maxlength: 50
     },
     color:{
@@ -24,4 +24,4 @@ const ComponentSchema = new mongoose.Schema({
 
 },{timestamps:true})
 
-module.exports = mongoose.model('Item', ComponentSchema)
+module.exports = mongoose.model('Component', ComponentSchema)
