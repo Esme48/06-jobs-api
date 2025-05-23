@@ -25,3 +25,5 @@ const ComponentSchema = new mongoose.Schema({
 },{timestamps:true})
 
 module.exports = mongoose.model('Component', ComponentSchema)
+
+//Test 1
