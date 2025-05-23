@@ -1,4 +1,4 @@
-const Component = require('../models/Component')
+const Component = require('../models/TestOneComponent')
 const {StatusCodes} = require('http-status-codes')
 const {BadRequestError, NotFoundError} = require('../errors')
 
