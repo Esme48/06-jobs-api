@@ -26,4 +26,3 @@ const ComponentSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('Component', ComponentSchema)
 
-//Week 9 Test 
