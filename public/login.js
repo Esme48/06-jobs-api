@@ -7,7 +7,7 @@ import {
   setToken,
 } from "./index.js";
 import { showLoginRegister } from "./loginRegister.js";
-import { showCart } from "./jobs.js";
+import { showItems } from "./component.js";
 
 let loginDiv = null;
 let email = null;
@@ -39,13 +39,13 @@ export const handleLogin = () => {
 
           const data = await response.json();
           if (response.status === 200) {
-            message.textContent = `Logon successful.  Welcome ${data.user.name}`;
+            message.textContent = `Welcome Back ${data.user.name}, We're So Happy You're Here :)`;
             setToken(data.token);
 
             email.value = "";
             password.value = "";
 
-            showCart();
+            showItems();
           } else {
             message.textContent = data.msg;
           }

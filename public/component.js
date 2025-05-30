@@ -9,25 +9,25 @@ import {
 import { showLoginRegister } from "./loginRegister.js";
 import { showAddEdit } from "./addEdit.js";
 
-let cartDiv = null;
-let cartTable = null;
-let cartTableHeader = null;
+let itemsDiv = null;
+let itemsTable = null;
+let itemsTableHeader = null;
 
-export const handleCart = () => {
-  cartDiv = document.getElementById("cart");
+export const handleItems = () => {
+  itemsDiv = document.getElementById("items");
   const logoff = document.getElementById("logoff");
   const addItem = document.getElementById("add-item");
-  cartTable = document.getElementById("cart-table");
-  cartTableHeader = document.getElementById("cart-table-header");
+  itemsTable = document.getElementById("items-table");
+  itemsTableHeader = document.getElementById("items-table-header");
 
-  cartDiv.addEventListener("click", (e) => {
+  itemsDiv.addEventListener("click", (e) => {
     if (inputEnabled && e.target.nodeName === "BUTTON") {
       if (e.target === addItem) {
         showAddEdit(null);
       } else if (e.target === logoff) {
         setToken(null);
         message.textContent = "You have been logged off.";
-        cartTable.replaceChildren([cartTableHeader]);
+        itemsTable.replaceChildren([itemsTableHeader]);
         showLoginRegister();
       } else if (e.target.classList.contains("editButton")) {
         message.textContent = "";
@@ -37,7 +37,7 @@ export const handleCart = () => {
   });
 };
 
-export const showCart = async () => {
+export const showItems = async () => {
   try {
     enableInput(false);
 
@@ -50,27 +50,29 @@ export const showCart = async () => {
     });
 
     const data = await response.json();
-    let children = [cartTableHeader];
+    let children = [itemsTableHeader];
 
     if (response.status === 200) {
       if (data.count === 0) {
-        cartTable.replaceChildren(...children); // clear this for safety
+        itemsTable.replaceChildren(...children); // clear table
       } else {
-        for (let i = 0; i < data.component.length; i++) {
+        for (let i = 0; i < data.items.length; i++) {
           let rowEntry = document.createElement("tr");
 
-          let editButton = `<td><button type="button" class="editButton" data-id=${data.component[i]._id}>edit</button></td>`;
-          let deleteButton = `<td><button type="button" class="deleteButton" data-id=${data.component[i]._id}>delete</button></td>`;
+          let editButton = `<button type="button" class="editButton" data-id="${data.items[i]._id}">edit</button>`;
+          let deleteButton = `<button type="button" class="deleteButton" data-id="${data.items[i]._id}">delete</button>`;
           let rowHTML = `
-            <td>${data.component[i].item}</td>
-            <td>${data.component[i].color}</td>
-            <td>${data.component[i].status}</td>
-            <div>${editButton}${deleteButton}</div>`;
+            <td>${data.items[i].item}</td>
+            <td>${data.items[i].color}</td>
+            <td>${data.items[i].status}</td>
+            <td>${editButton}</td>
+            <td>${deleteButton}</td>
+          `;
 
           rowEntry.innerHTML = rowHTML;
           children.push(rowEntry);
         }
-        cartTable.replaceChildren(...children);
+        itemsTable.replaceChildren(...children);
       }
     } else {
       message.textContent = data.msg;
@@ -79,6 +81,7 @@ export const showCart = async () => {
     console.log(err);
     message.textContent = "A communication error occurred.";
   }
+
   enableInput(true);
-  setDiv(cartDiv);
+  setDiv(itemsDiv);
 };
