@@ -101,9 +101,9 @@ export const showAddEdit = async (compId) => {
 
       const data = await response.json();
       if (response.status === 200) {
-        item.value = data.components.item;
-        color.value = data.components.color;
-        status.value = data.components.status;
+        item.value = data.comp.item;
+        color.value = data.comp.color;
+        status.value = data.comp.status;
         addingItem.textContent = "update";
         message.textContent = "";
         addEditDiv.dataset.id = compId;
