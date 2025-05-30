@@ -7,7 +7,7 @@ import {
   enableInput,
 } from "./index.js";
 import { showLoginRegister } from "./loginRegister.js";
-import { showAddEdit } from "./addEdit.js";
+import { showAddEdit, deleteItem } from "./addEdit.js";
 
 let itemsDiv = null;
 let itemsTable = null;
@@ -26,12 +26,14 @@ export const handleItems = () => {
         showAddEdit(null);
       } else if (e.target === logoff) {
         setToken(null);
-        message.textContent = "You have been logged off.";
+        message.textContent = "You have been logged out.";
         itemsTable.replaceChildren([itemsTableHeader]);
         showLoginRegister();
       } else if (e.target.classList.contains("editButton")) {
         message.textContent = "";
         showAddEdit(e.target.dataset.id);
+      } else if (e.target.classList.contains("deleteButton")) {
+        deleteItem(e.target.dataset.id);
       }
     }
   });
