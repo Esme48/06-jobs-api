@@ -78,8 +78,8 @@ export const handleAddEdit = () => {
   });
 };
 
-export const showAddEdit = async (itemId) => {
-  if (!itemId) {
+export const showAddEdit = async (compId) => {
+  if (!compId) {
     item.value = "";
     color.value = "";
     status.value = "Item Pending Review";
@@ -91,7 +91,7 @@ export const showAddEdit = async (itemId) => {
     enableInput(false);
 
     try {
-      const response = await fetch(`/api/v1/component/${itemId}`, {
+      const response = await fetch(`/api/v1/component/${compId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -101,12 +101,12 @@ export const showAddEdit = async (itemId) => {
 
       const data = await response.json();
       if (response.status === 200) {
-        item.value = data.item.item;
-        color.value = data.item.color;
-        status.value = data.item.status;
+        item.value = data.components.item;
+        color.value = data.components.color;
+        status.value = data.components.status;
         addingItem.textContent = "update";
         message.textContent = "";
-        addEditDiv.dataset.id = itemId;
+        addEditDiv.dataset.id = compId;
 
         setDiv(addEditDiv);
       } else {
@@ -124,5 +124,5 @@ export const showAddEdit = async (itemId) => {
   }
 };
 
-///Adding Comment To Push Again
+
 

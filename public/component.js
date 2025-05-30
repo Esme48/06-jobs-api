@@ -56,15 +56,15 @@ export const showItems = async () => {
       if (data.count === 0) {
         itemsTable.replaceChildren(...children); // clear table
       } else {
-        for (let i = 0; i < data.items.length; i++) {
+        for (let i = 0; i < data.components.length; i++) {
           let rowEntry = document.createElement("tr");
 
-          let editButton = `<button type="button" class="editButton" data-id="${data.items[i]._id}">edit</button>`;
-          let deleteButton = `<button type="button" class="deleteButton" data-id="${data.items[i]._id}">delete</button>`;
+          let editButton = `<button type="button" class="editButton" data-id="${data.components[i]._id}">edit</button>`;
+          let deleteButton = `<button type="button" class="deleteButton" data-id="${data.components[i]._id}">delete</button>`;
           let rowHTML = `
-            <td>${data.items[i].item}</td>
-            <td>${data.items[i].color}</td>
-            <td>${data.items[i].status}</td>
+            <td>${data.components[i].item}</td>
+            <td>${data.components[i].color}</td>
+            <td>${data.components[i].status}</td>
             <td>${editButton}</td>
             <td>${deleteButton}</td>
           `;
