@@ -29,6 +29,7 @@ export const handleRegister = () => {
       if (e.target === registerButton) {
         if (password1.value != password2.value) {
           message.textContent = "The passwords entered do not match.";
+          return;
         } else {
           enableInput(false);
 
