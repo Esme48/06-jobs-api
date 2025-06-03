@@ -63,7 +63,7 @@ const deleteComponent = async (req, res) => {
     if(!comp){
         throw new NotFoundError(`No Component with id ${compId}`)
     }
-    res.status(StatusCodes.OK).json({ comp })
+    res.status(StatusCodes.OK).json({ msg: "The Entry Was Deleted" })
 }
 
 
